@@ -9,7 +9,7 @@ class App extends Component {
     return (
 
 	      <div className="App">
-			<JafAppBar setLocale={this.props.setLocale} sLocale={this.props.sLocale}/>
+			<JafAppBar setLocale={this.props.setLocale} sLocale={this.props.sLocale} jobs={[]}/>
 	        <p className="App-intro">
 	            <FormattedMessage
                     id="intro"
