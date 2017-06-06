@@ -12,6 +12,7 @@ injectTapEventPlugin();
 
 
 ReactDOM.render(
+	
     <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
     	<IntlComp>
   		</IntlComp>
