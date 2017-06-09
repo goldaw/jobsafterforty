@@ -3,6 +3,7 @@ import AppBar from 'material-ui/AppBar';
 import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import LocalesMenu from './locales-menu';
+import Auth from "./Auth.js";
 
 class JafAppBar extends Component {
   getChildContext() {
@@ -17,7 +18,9 @@ class JafAppBar extends Component {
   <AppBar
     title="להתבגר בהיי-טק"
     iconElementRight={<LocalesMenu locales={aLocales} sLocale={this.props.sLocale} setLocale={this.props.setLocale}/>}
-  />
+  >
+	<Auth></Auth>
+  </AppBar>
   </div>
 	);
 }}

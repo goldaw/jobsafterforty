@@ -1,12 +1,10 @@
 ﻿import React, { Component } from 'react';
 import {FormattedMessage} from 'react-intl';
 import JafAppBar from './Appbar';
-//import JobsGrid from './Jobsgrid';
 import { Provider } from "react-redux";
 import store from "./store/index.js";
 import { listenToAuth } from "./actions/auth";
 import { listenToArticles } from "./actions/articles";
-import "./Auth.js";
 import './App.css';
 
 class App extends Component {

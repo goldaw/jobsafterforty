@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { openAuth, logoutUser } from "./actions/auth";
 import C from "./constants";
-/*
+
 const Auth = props => {
   switch (props.auth.status) {
     case C.AUTH_LOGGED_IN:
@@ -34,10 +34,4 @@ const mapDispatchToProps = {
   logoutUser
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Auth);*/
-class Auth extends Component {
-  render() {
-    return (<b>Auth</b>);
-  }
-}
-export default Auth;
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);
