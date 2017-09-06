@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { openAuth, logoutUser } from "./actions/auth";
-import C from "./constants";
+import C from "./constants/auth.js";
 
 const Auth = props => {
+
   switch (props.auth.status) {
+
     case C.AUTH_LOGGED_IN:
       return (
         <p>
@@ -12,12 +14,14 @@ const Auth = props => {
           {" "}<button onClick={props.logoutUser}>Log out</button>
         </p>
       );
+      break;
     case C.AUTH_AWAITING_RESPONSE:
       return (
         <p>
           <button disabled>authenticating...</button>
         </p>
       );
+      break;
     default:
       return (
         <p>
