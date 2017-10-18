@@ -57,6 +57,28 @@ describe('auth actions', () => {
 		});
 	})
 	describe('openAuth', () => {
-//todo: add tests to all auth action dispatchers
+		it('should dispatch open action', () => {
+			const my_store = mockStore(function getState() {return {auth: {status: C.AUTH_ANONYMOUS}}})
+
+			const expectedActions = [
+     		{
+        	type: C.AUTH_OPEN
+      		}
+    		]
+		my_store.dispatch(actions.openAuth())
+			expect(my_store.getActions()).toEqual(expectedActions);			
+		});
+	})
+	describe('logoutUser', () => {
+		it('should dispatch AUTH_LOGOUT action', () => {
+			const my_store = mockStore(function getState() {return {auth: {status: C.AUTH_ANONYMOUS}}})
+			const expectedActions = [
+     		{
+        	type: C.AUTH_LOGOUT
+      		}
+    		]
+		my_store.dispatch(actions.logoutUser())
+			expect(my_store.getActions()).toEqual(expectedActions);			
+		});
 	})
 })
