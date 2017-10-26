@@ -1,0 +1,17 @@
+exports[`test If logged in, shows username 1`] = `
+<p>
+  <button
+    onClick={[Function]}>
+    Log in
+  </button>
+</p>
+`;
+
+exports[`test When logged out, shows: "log in" 1`] = `
+<p>
+  <button
+    onClick={[Function]}>
+    Log in
+  </button>
+</p>
+`;

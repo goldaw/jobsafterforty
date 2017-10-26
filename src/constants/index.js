@@ -1,11 +1,10 @@
 //import articles from './articles';
-//import auth from './auth';
+import auth from './auth';
 //import feedback from './feedback';
 import firebase from './firebase';
-
 export default {
   //...articles,
-  //...auth,
+  ...auth,
   //...feedback,
   ...firebase
 };
