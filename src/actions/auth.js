@@ -3,21 +3,22 @@ import * as firebase from "firebase";
 import C from "../constants";
 import { auth } from "../firebaseApp";
 
-export const listenToAuth = () => (dispatch, getState) => {
-  auth.onAuthStateChanged(authData => {
+export const listenToAuth = () => {return (dispatch, getState) => {
+ 
+  return auth.onAuthStateChanged(authData => {
     if (authData) {
-      dispatch({
+      return dispatch({
         type: C.AUTH_LOGIN,
         uid: authData.uid,
         username: authData.providerData[0].displayName
       });
     } else {
       if (getState().auth.status !== C.AUTH_ANONYMOUS) {
-        dispatch({ type: C.AUTH_LOGOUT });
+        return dispatch({ type: C.AUTH_LOGOUT });
       }
     }
-  });
-};
+  })
+}};
 
 export const openAuth = () => dispatch => {
   dispatch({ type: C.AUTH_OPEN });
