@@ -1,4 +1,4 @@
-import C from "../constants";
+import C from "../constants/articles";
 import { database } from "../firebaseApp";
 
 const articlesRef = database.ref("articles");

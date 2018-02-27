@@ -6,3 +6,6 @@ body {
   direction: 'rtl';
   text-align: 'right'
 }
+.reqLabel {
+  color: red
+}

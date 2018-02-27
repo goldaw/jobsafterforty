@@ -15,10 +15,11 @@ class JafAppBar extends Component {
   	{shortText: "he", primaryText: "עברית"},
     {shortText: "en", primaryText: "English"}];
     const style={padding:12}
+    let iconElementRight = (<div><DialogRegistration></DialogRegistration></div>)
   return (<div>
   <AppBar
     title="להתבגר בהיי-טק"
-    iconElementRight={<DialogRegistration></DialogRegistration>}
+    iconElementRight={iconElementRight}
     iconStyleRight={style}
   >
   </AppBar>
