@@ -2,10 +2,6 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Rubik', Arial;
-  font-size: 48px;
   direction: 'rtl';
   text-align: 'right'
-}
-.reqLabel {
-  color: red
 }

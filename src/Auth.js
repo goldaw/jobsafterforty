@@ -1,18 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { openAuth, logoutUser } from "./actions/auth";
+import { openAuth} from "./actions/auth";
 import C from "./constants/auth.js";
-
+import DialogRegistration from "./Registration.js";
+import DialogLogin from "./Login.js";
+import { TableRowColumn } from "material-ui";
 const Auth = props => {
-
+  var Style={display: 'flex', flexDirection: 'row'}
   switch (props.auth.status) {
 
     case C.AUTH_LOGGED_IN:
       return (
-        <p>
-          <span>Logged in as {props.auth.username}.</span>
-          {" "}<button onClick={props.logoutUser}>Log out</button>
-        </p>
+        <div><span>{props.auth.username} שלום</span></div>
       );
       break;
     case C.AUTH_AWAITING_RESPONSE:
@@ -23,10 +22,10 @@ const Auth = props => {
       );
       break;
     default:
-      return (
-        <p>
-          <button onClick={props.openAuth}>Log in</button>
-        </p>
+      return (<div style={Style}>
+          <DialogRegistration></DialogRegistration>
+          <DialogLogin onClick={props.openAuth}></DialogLogin>
+          </div>
       );
   }
 };
@@ -34,8 +33,7 @@ const Auth = props => {
 const mapStateToProps = state => ({ auth: state.auth });
 
 const mapDispatchToProps = {
-  openAuth,
-  logoutUser
+  openAuth
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Auth);

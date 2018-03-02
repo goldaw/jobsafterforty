@@ -3,7 +3,7 @@ import AppBar from 'material-ui/AppBar';
 import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import LocalesMenu from './locales-menu';
-import DialogRegistration from "./Registration.js";
+import Auth from './Auth';
 
 class JafAppBar extends Component {
   getChildContext() {
@@ -14,8 +14,8 @@ class JafAppBar extends Component {
   	const aLocales=[
   	{shortText: "he", primaryText: "עברית"},
     {shortText: "en", primaryText: "English"}];
-    const style={padding:12}
-    let iconElementRight = (<div><DialogRegistration></DialogRegistration></div>)
+    const style={padding:0, color: 'white'}
+    let iconElementRight = (<div><Auth></Auth></div>)
   return (<div>
   <AppBar
     title="להתבגר בהיי-טק"
