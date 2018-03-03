@@ -112,7 +112,7 @@ this.props.signIn(email, userpwd);
           modal={false}
           open={this.state.open}
           actionsContainerStyle={{textAlign:"left"}}
-          style={{direction:'rtl',textAlign:'right', width:10, margin:5}}
+          style={{direction:'rtl',textAlign:'right'}}
           onRequestClose={this.handleClose}
         >
           <label htmlFor="email"><font className="reqLabel">*</font>כתובת אימייל</label><br/>

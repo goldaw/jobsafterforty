@@ -14,20 +14,17 @@ const Auth = props => {
         <div><span>{props.auth.username} שלום</span></div>
       );
       break;
-    case C.AUTH_AWAITING_RESPONSE:
-      return (
-        <p>
-          <button disabled>authenticating...</button>
-        </p>
-      );
-      break;
-    default:
+
+    case C.AUTH_ANONYMOUS:
       return (<div style={Style}>
           <DialogRegistration></DialogRegistration>
           <DialogLogin onClick={props.openAuth}></DialogLogin>
           </div>
       );
-  }
+      default:
+      return (<div></div>);
+      break;
+    }
 };
 
 const mapStateToProps = state => ({ auth: state.auth });

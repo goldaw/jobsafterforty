@@ -51,7 +51,7 @@ export default class DialogRegistration extends React.Component {
 
     auth.createUserWithEmailAndPassword(email, userpwd)
       .then(authUser => {
-        this.setState()
+        authUser.updateProfile({displayName:username});
         this.handleClose();
       })
       .catch(error => {
@@ -122,7 +122,7 @@ export default class DialogRegistration extends React.Component {
           modal={false}
           open={this.state.open}
           actionsContainerStyle={{textAlign:"left"}}
-          style={{direction:'rtl',textAlign:'right', width: 50}}
+          style={{direction:'rtl',textAlign:'right'}}
           onRequestClose={this.handleClose}
         >
           <label htmlFor="username"><font className="reqLabel">*</font>שם משתמש</label><br/>

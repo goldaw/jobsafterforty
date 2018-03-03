@@ -25,7 +25,6 @@ export const openAuth = () => dispatch => {
  
 };
 export const signIn = (email, password) => dispatch => {
-alert("signin")
   firebase.auth().signInWithEmailAndPassword(email, password).then((authData) => {
   }). catch((error) => {
     // Handle Errors here.
@@ -40,6 +39,7 @@ alert("signin")
   });
 };
 export const logoutUser = () => dispatch => {
+  //alert("logout")
   dispatch({ type: C.AUTH_LOGOUT });
   auth.signOut();
 };
