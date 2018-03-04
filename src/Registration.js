@@ -52,6 +52,9 @@ export default class DialogRegistration extends React.Component {
     auth.createUserWithEmailAndPassword(email, userpwd)
       .then(authUser => {
         authUser.updateProfile({displayName:username});
+        auth.signOut().then(()=> {
+          auth.signInWithEmailAndPassword(email, userpwd);
+        })
         this.handleClose();
       })
       .catch(error => {
@@ -101,7 +104,6 @@ export default class DialogRegistration extends React.Component {
       userpwd2,
       error
     } = this.state;    
-    const style= {fontSize:12,display:'block'}
  
     const actions = [
       <FlatButton
@@ -115,7 +117,7 @@ export default class DialogRegistration extends React.Component {
     return (
       <div>
       <div>
-        <RaisedButton style={style} label="הרשמה" onTouchTap={this.handleOpen} />
+        <RaisedButton style={{margin:5}} label="הרשמה" onTouchTap={this.handleOpen} />
         <Dialog
           title="הרשמה"
           actions={actions}

@@ -91,7 +91,6 @@ this.props.signIn(email, userpwd);
       userpwd,
       error
     } = this.state;    
-    const style= {fontSize:12,display:'block'}
  
     const actions = [
       <FlatButton
@@ -105,7 +104,7 @@ this.props.signIn(email, userpwd);
     return (
       <div>
       <div>
-        <RaisedButton style={style} label="כניסה" onTouchTap={this.handleOpen} />
+        <RaisedButton style={{margin:5}} label="כניסה" onTouchTap={this.handleOpen} />
         <Dialog
           title="כניסה"
           actions={actions}
