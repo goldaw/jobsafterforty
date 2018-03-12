@@ -7,6 +7,7 @@ import { listenToAuth } from "./actions/auth";
 import { listenToArticles } from "./actions/articles";
 import './App.css';
 import Feedback from "./feedback";
+import JobsList from "./JobsList.js";
 
 class App extends Component {
    componentWillMount() {
@@ -19,6 +20,7 @@ class App extends Component {
 <Provider store={store}>
 	      <div className="App">
 			<JafAppBar setLocale={this.props.setLocale} sLocale={this.props.sLocale}/>
+            <div style={{width:"80%", margin: "auto"}}>
             <p className="App-intro">            
 	            <FormattedMessage
                     id="intro"
@@ -26,7 +28,10 @@ class App extends Component {
                     values={{egCompanies: <b dir="rtl">{egCompanies}</b>}}
                 />
              </p>
-             <Feedback />             
+             <JobsList/>
+             </div>
+             <Feedback />
+         
 	     </div>
 </Provider>
     );

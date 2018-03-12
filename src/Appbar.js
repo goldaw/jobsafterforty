@@ -8,6 +8,7 @@ import LeftMenu from './LeftMenu';
 import { connect } from "react-redux";
 import { openMenu} from "./actions/leftmenu";
 import C from "./constants/leftmenu.js";
+
 class JafAppBar extends Component {
   getChildContext() {
   	return { muiTheme: getMuiTheme(baseTheme) };

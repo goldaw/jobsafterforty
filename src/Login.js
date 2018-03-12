@@ -114,9 +114,9 @@ this.props.signIn(email, userpwd);
           style={{direction:'rtl',textAlign:'right'}}
           onRequestClose={this.handleClose}
         >
-          <label htmlFor="email"><font className="reqLabel">*</font>כתובת אימייל</label><br/>
+          <label htmlFor="email">כתובת אימייל</label><br/>
           <TextField hintText="נא למלא שדה זה" id="email" name="email" defaultValue={this.state.email} onChange={event => {this.handleFieldChange("email", event.target.value)}}/><br/>          
-          <label htmlFor="userpwd"><font className="reqLabel">*</font>סיסמה</label><br/>
+          <label htmlFor="userpwd">סיסמה</label><br/>
           <TextField hintText="נא למלא שדה זה" id="userpwd" name="userpwd" type="password" defaultValue={this.state.userpwd} onChange={event => {this.handleFieldChange("userpwd", event.target.value)}}/><br/>
           <FormErrors formErrors={this.state.formErrors} />
         </Dialog>
