@@ -14,6 +14,15 @@ it('renders shallow correctly', () => {
   const tree = renderer.getRenderOutput();
   expect(tree).toMatchSnapshot();
 });
+it('opens the form', () => {
+  const renderer = new ShallowRenderer();
+  renderer.render(<Registration/>);
+  const tree0 = renderer.getRenderOutput();
+  expect(tree0).toMatchSnapshot();
+  tree0.props.children.props.children[0].props.onTouchTap()
+  const tree1 = renderer.getRenderOutput();
+  expect(tree1).toMatchSnapshot();
+});
 it('renders correctly', () => {
 
   const tree = Renderer
