@@ -1,21 +1,21 @@
-import C from "../constants/articles";
-import { database } from "../firebaseApp";
+import C from '../constants/articles';
+import { database } from '../firebaseApp';
 
-const articlesRef = database.ref("articles");
+const articlesRef = database.ref('jobs');
 
 export const listenToArticles = () => dispatch =>
   articlesRef.on(
-    "value",
+    'value',
     snapshot =>
       dispatch({
         type: C.ARTICLES_RECEIVE_DATA,
-        data: snapshot.val()
+        data: snapshot.val(),
       }),
     error =>
       dispatch({
         type: C.ARTICLES_RECEIVE_DATA_ERROR,
-        message: error.message
-      })
+        message: error.message,
+      }),
   );
 
 export const submitArticle = content => (dispatch, getState) => {
@@ -23,20 +23,20 @@ export const submitArticle = content => (dispatch, getState) => {
   const article = {
     content,
     username: state.auth.username,
-    uid: state.auth.uid
+    uid: state.auth.uid,
   };
   dispatch({ type: C.ARTICLE_AWAIT_CREATION_RESPONSE });
-  articlesRef.push(article, error => {
+  articlesRef.push(article, (error) => {
     dispatch({ type: C.ARTICLE_RECEIVE_CREATION_RESPONSE });
     if (error) {
       dispatch({
         type: C.FEEDBACK_DISPLAY_ERROR,
-        error: `Article submission failed! ${error}`
+        error: `Article submission failed! ${error}`,
       });
     } else {
       dispatch({
         type: C.FEEDBACK_DISPLAY_MESSAGE,
-        message: "Article successfully saved!"
+        message: 'Article successfully saved!',
       });
     }
   });
@@ -53,38 +53,38 @@ export const submitArticleEdit = (qid, content) => (dispatch, getState) => {
   const article = {
     content,
     username: state.auth.username,
-    uid: state.auth.uid
+    uid: state.auth.uid,
   };
   dispatch({ type: C.ARTICLE_EDIT_SUBMIT, qid });
-  articlesRef.child(qid).set(article, error => {
+  articlesRef.child(qid).set(article, (error) => {
     dispatch({ type: C.ARTICLE_EDIT_FINISH, qid });
     if (error) {
       dispatch({
         type: C.FEEDBACK_DISPLAY_ERROR,
-        error: `Article update failed! ${error}`
+        error: `Article update failed! ${error}`,
       });
     } else {
       dispatch({
         type: C.FEEDBACK_DISPLAY_MESSAGE,
-        message: "Article successfully updated!"
+        message: 'Article successfully updated!',
       });
     }
   });
 };
 
-export const deleteArticle = qid => dispatch => {
+export const deleteArticle = qid => (dispatch) => {
   dispatch({ type: C.ARTICLE_EDIT_SUBMIT, qid });
-  articlesRef.child(qid).remove(error => {
+  articlesRef.child(qid).remove((error) => {
     dispatch({ type: C.ARTICLE_EDIT_FINISH, qid });
     if (error) {
       dispatch({
         type: C.FEEDBACK_DISPLAY_ERROR,
-        error: `Article deletion failed! ${error}`
+        error: `Article deletion failed! ${error}`,
       });
     } else {
       dispatch({
         type: C.FEEDBACK_DISPLAY_MESSAGE,
-        message: "Article successfully deleted!"
+        message: 'Article successfully deleted!',
       });
     }
   });
