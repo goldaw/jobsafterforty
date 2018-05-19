@@ -1,4 +1,5 @@
 import C from '../constants/jobs';
+import C_feedback from '../constants/feedback';
 import { database } from '../firebaseApp';
 
 const jobsRef = database.ref('jobs');
@@ -30,12 +31,12 @@ export const submitJob = content => (dispatch, getState) => {
     dispatch({ type: C.JOB_RECEIVE_CREATION_RESPONSE });
     if (error) {
       dispatch({
-        type: C.FEEDBACK_DISPLAY_ERROR,
+        type: C_feedback.FEEDBACK_DISPLAY_ERROR,
         error: `Job submission failed! ${error}`,
       });
     } else {
       dispatch({
-        type: C.FEEDBACK_DISPLAY_MESSAGE,
+        type: C_feedback.FEEDBACK_DISPLAY_MESSAGE,
         message: 'Job successfully saved!',
       });
     }
@@ -60,12 +61,12 @@ export const submitJobEdit = (qid, content) => (dispatch, getState) => {
     dispatch({ type: C.JOB_EDIT_FINISH, qid });
     if (error) {
       dispatch({
-        type: C.FEEDBACK_DISPLAY_ERROR,
+        type: C_feedback.FEEDBACK_DISPLAY_ERROR,
         error: `Job update failed! ${error}`,
       });
     } else {
       dispatch({
-        type: C.FEEDBACK_DISPLAY_MESSAGE,
+        type: C_feedback.FEEDBACK_DISPLAY_MESSAGE,
         message: 'Job successfully updated!',
       });
     }
@@ -78,12 +79,12 @@ export const deleteJob = qid => (dispatch) => {
     dispatch({ type: C.JOB_EDIT_FINISH, qid });
     if (error) {
       dispatch({
-        type: C.FEEDBACK_DISPLAY_ERROR,
+        type: C_feedback.FEEDBACK_DISPLAY_ERROR,
         error: `Job deletion failed! ${error}`,
       });
     } else {
       dispatch({
-        type: C.FEEDBACK_DISPLAY_MESSAGE,
+        type: C_feedback.FEEDBACK_DISPLAY_MESSAGE,
         message: 'Job successfully deleted!',
       });
     }

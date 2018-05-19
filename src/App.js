@@ -1,6 +1,7 @@
 ﻿import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import JafAppBar from './Appbar';
+import DialogAddJob from './AddJob';
 import { Provider } from 'react-redux';
 import store from './store/index.js';
 import { listenToAuth } from './actions/auth';
@@ -35,6 +36,7 @@ class App extends Component {
                 values={{ egCompanies: <b dir="rtl">{egCompanies}</b> }}
               />
             </p>
+            <DialogAddJob />
             <JobsTable data={data} />
           </div>
           <Feedback />
