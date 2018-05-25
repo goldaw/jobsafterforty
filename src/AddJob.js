@@ -53,6 +53,7 @@ class DialogAddJob extends React.Component {
       location: this.state.location,
       contact_details: this.state.contact_details,
     }));
+    this.handleClose();
   }
 
   validateField(fieldName, value) {
