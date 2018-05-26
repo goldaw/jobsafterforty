@@ -118,24 +118,24 @@ export default class DialogRegistration extends React.Component {
         <div>
           <RaisedButton style={{ margin: 5 }} label="הרשמה" onTouchTap={this.handleOpen} />
           <Dialog
-          title="הרשמה"
-          actions={actions}
-          modal={false}
-          open={this.state.open}
-          actionsContainerStyle={{ textAlign: 'left' }}
-          style={{ direction: 'rtl', textAlign: 'right' }}
-          onRequestClose={this.handleClose}
-        >
-          <label htmlFor="username"><font className="reqLabel">*</font>שם משתמש</label><br />
-          <TextField hintText="נא למלא שדה זה" id="username" name="username" defaultValue={this.state.username} onChange={(event) => { this.handleFieldChange('username', event.target.value); }} /><br />
-          <label htmlFor="email"><font className="reqLabel">*</font>כתובת אימייל</label><br />
-          <TextField hintText="נא למלא שדה זה" id="email" name="email" defaultValue={this.state.email} onChange={(event) => { this.handleFieldChange('email', event.target.value); }} /><br />
-          <label htmlFor="userpwd"><font className="reqLabel">*</font>סיסמה</label><br />
-          <TextField hintText="נא למלא שדה זה" id="userpwd" name="userpwd" type="password" defaultValue={this.state.userpwd} onChange={(event) => { this.handleFieldChange('userpwd', event.target.value); }} /><br />
-          <label htmlFor="userpwd"><font className="reqLabel">*</font>וידוא סיסמה</label><br />
-          <TextField hintText="נא למלא שדה זה" id="userpwd2" name="userpwd2" type="password" defaultValue={this.state.userpwd2} onChange={(event) => { this.handleFieldChange('userpwd2', event.target.value); }} /><br />
-          <FormErrors formErrors={this.state.formErrors} />
-        </Dialog>
+            title="הרשמה"
+            actions={actions}
+            modal={false}
+            open={this.state.open}
+            actionsContainerStyle={{ textAlign: 'left' }}
+            style={{ direction: 'rtl', textAlign: 'right' }}
+            onRequestClose={this.handleClose}
+          >
+            <label htmlFor="username"><font className="reqLabel">*</font>שם משתמש</label><br />
+            <TextField hintText="נא למלא שדה זה" id="username" name="username" defaultValue={this.state.username} onChange={(event) => { this.handleFieldChange('username', event.target.value); }} /><br />
+            <label htmlFor="email"><font className="reqLabel">*</font>כתובת אימייל</label><br />
+            <TextField hintText="נא למלא שדה זה" id="email" name="email" defaultValue={this.state.email} onChange={(event) => { this.handleFieldChange('email', event.target.value); }} /><br />
+            <label htmlFor="userpwd"><font className="reqLabel">*</font>סיסמה</label><br />
+            <TextField hintText="נא למלא שדה זה" id="userpwd" name="userpwd" type="password" defaultValue={this.state.userpwd} onChange={(event) => { this.handleFieldChange('userpwd', event.target.value); }} /><br />
+            <label htmlFor="userpwd2"><font className="reqLabel">*</font>וידוא סיסמה</label><br />
+            <TextField hintText="נא למלא שדה זה" id="userpwd2" name="userpwd2" type="password" defaultValue={this.state.userpwd2} onChange={(event) => { this.handleFieldChange('userpwd2', event.target.value); }} /><br />
+            <FormErrors formErrors={this.state.formErrors} />
+          </Dialog>
         </div>
       </div>
     );

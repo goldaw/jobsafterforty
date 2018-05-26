@@ -4,8 +4,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 function JobsTable(props) {
-  const { data } = props;
-
   const columns = [{
     Header: 'תפקיד',
     accessor: 'title', // String-based value accessors!
@@ -14,9 +12,8 @@ function JobsTable(props) {
     accessor: 'location',
     Cell: cellProps => <span className="number">{cellProps.value}</span>, // Custom cell components!
   }];
-
   return (<ReactTable
-    data={data}
+    data={(props.jobs instanceof Array) ? props.jobs : []}
     columns={columns}
     filterable
     className="-striped -highlight"
@@ -27,7 +24,7 @@ function JobsTable(props) {
 }
 
 const mapStateToProps = state => ({
-  jobs: state.jobs,
+  jobs: state.jobs.data,
   auth: state.auth,
 });
 
