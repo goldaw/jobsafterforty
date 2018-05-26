@@ -2,7 +2,7 @@ import C from '../constants/jobs';
 import C_feedback from '../constants/feedback';
 import { database } from '../firebaseApp';
 
-const jobsRef = database.ref('jobs');
+const jobsRef = database.ref('jobs').limitToLast(100);
 
 export const listenToJobs = () => dispatch =>
   jobsRef.on(
@@ -10,7 +10,7 @@ export const listenToJobs = () => dispatch =>
     snapshot =>
       dispatch({
         type: C.JOBS_RECEIVE_DATA,
-        data: snapshot.val(),
+        data: Object.keys(snapshot.val()).map(key => ({ title: snapshot.val()[key].content.position, location: snapshot.val()[key].content.location })),
       }),
     error =>
       dispatch({

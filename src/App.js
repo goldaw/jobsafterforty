@@ -37,7 +37,7 @@ class App extends Component {
               />
             </p>
             <DialogAddJob />
-            <JobsTable data={data} />
+            <JobsTable />
           </div>
           <Feedback />
 
