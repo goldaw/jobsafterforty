@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "jobsafterforty"
+    "default": "jobsafterforty",
+    "staging": "jobsafterforty-staging"
   }
 }

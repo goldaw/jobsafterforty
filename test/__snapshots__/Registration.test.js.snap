@@ -1,0 +1,565 @@
+exports[`test opens the form 1`] = `
+<div>
+  <div>
+    <RaisedButton
+      disabled={false}
+      fullWidth={false}
+      label="הרשמה"
+      labelPosition="after"
+      onTouchTap={[Function]}
+      primary={false}
+      secondary={false}
+      style={
+        Object {
+          "margin": 5,
+        }
+      } />
+    <Dialog
+      actions={
+        Array [
+          <FlatButton
+            disabled={true}
+            fullWidth={false}
+            keyboardFocused={true}
+            label="אישור"
+            labelPosition="after"
+            labelStyle={Object {}}
+            onKeyboardFocus={[Function]}
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            onTouchStart={[Function]}
+            onTouchTap={[Function]}
+            primary={true}
+            secondary={false} />,
+        ]
+      }
+      actionsContainerStyle={
+        Object {
+          "textAlign": "left",
+        }
+      }
+      autoDetectWindowHeight={true}
+      autoScrollBodyContent={false}
+      modal={false}
+      onRequestClose={[Function]}
+      open={false}
+      repositionOnUpdate={true}
+      style={
+        Object {
+          "direction": "rtl",
+          "textAlign": "right",
+        }
+      }
+      title="הרשמה">
+      <label
+        htmlFor="username">
+        <font
+          className="reqLabel">
+          *
+        </font>
+        שם משתמש
+      </label>
+      <br />
+      <TextField
+        defaultValue=""
+        disabled={false}
+        floatingLabelFixed={false}
+        fullWidth={false}
+        hintText="נא למלא שדה זה"
+        id="username"
+        multiLine={false}
+        name="username"
+        onChange={[Function]}
+        rows={1}
+        type="text"
+        underlineShow={true} />
+      <br />
+      <label
+        htmlFor="email">
+        <font
+          className="reqLabel">
+          *
+        </font>
+        כתובת אימייל
+      </label>
+      <br />
+      <TextField
+        defaultValue=""
+        disabled={false}
+        floatingLabelFixed={false}
+        fullWidth={false}
+        hintText="נא למלא שדה זה"
+        id="email"
+        multiLine={false}
+        name="email"
+        onChange={[Function]}
+        rows={1}
+        type="text"
+        underlineShow={true} />
+      <br />
+      <label
+        htmlFor="userpwd">
+        <font
+          className="reqLabel">
+          *
+        </font>
+        סיסמה
+      </label>
+      <br />
+      <TextField
+        defaultValue=""
+        disabled={false}
+        floatingLabelFixed={false}
+        fullWidth={false}
+        hintText="נא למלא שדה זה"
+        id="userpwd"
+        multiLine={false}
+        name="userpwd"
+        onChange={[Function]}
+        rows={1}
+        type="password"
+        underlineShow={true} />
+      <br />
+      <label
+        htmlFor="userpwd">
+        <font
+          className="reqLabel">
+          *
+        </font>
+        וידוא סיסמה
+      </label>
+      <br />
+      <TextField
+        defaultValue=""
+        disabled={false}
+        floatingLabelFixed={false}
+        fullWidth={false}
+        hintText="נא למלא שדה זה"
+        id="userpwd2"
+        multiLine={false}
+        name="userpwd2"
+        onChange={[Function]}
+        rows={1}
+        type="password"
+        underlineShow={true} />
+      <br />
+      <Unknown
+        formErrors={Object {}} />
+    </Dialog>
+  </div>
+</div>
+`;
+
+exports[`test opens the form 2`] = `
+<div>
+  <div>
+    <RaisedButton
+      disabled={false}
+      fullWidth={false}
+      label="הרשמה"
+      labelPosition="after"
+      onTouchTap={[Function]}
+      primary={false}
+      secondary={false}
+      style={
+        Object {
+          "margin": 5,
+        }
+      } />
+    <Dialog
+      actions={
+        Array [
+          <FlatButton
+            disabled={true}
+            fullWidth={false}
+            keyboardFocused={true}
+            label="אישור"
+            labelPosition="after"
+            labelStyle={Object {}}
+            onKeyboardFocus={[Function]}
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            onTouchStart={[Function]}
+            onTouchTap={[Function]}
+            primary={true}
+            secondary={false} />,
+        ]
+      }
+      actionsContainerStyle={
+        Object {
+          "textAlign": "left",
+        }
+      }
+      autoDetectWindowHeight={true}
+      autoScrollBodyContent={false}
+      modal={false}
+      onRequestClose={[Function]}
+      open={true}
+      repositionOnUpdate={true}
+      style={
+        Object {
+          "direction": "rtl",
+          "textAlign": "right",
+        }
+      }
+      title="הרשמה">
+      <label
+        htmlFor="username">
+        <font
+          className="reqLabel">
+          *
+        </font>
+        שם משתמש
+      </label>
+      <br />
+      <TextField
+        defaultValue=""
+        disabled={false}
+        floatingLabelFixed={false}
+        fullWidth={false}
+        hintText="נא למלא שדה זה"
+        id="username"
+        multiLine={false}
+        name="username"
+        onChange={[Function]}
+        rows={1}
+        type="text"
+        underlineShow={true} />
+      <br />
+      <label
+        htmlFor="email">
+        <font
+          className="reqLabel">
+          *
+        </font>
+        כתובת אימייל
+      </label>
+      <br />
+      <TextField
+        defaultValue=""
+        disabled={false}
+        floatingLabelFixed={false}
+        fullWidth={false}
+        hintText="נא למלא שדה זה"
+        id="email"
+        multiLine={false}
+        name="email"
+        onChange={[Function]}
+        rows={1}
+        type="text"
+        underlineShow={true} />
+      <br />
+      <label
+        htmlFor="userpwd">
+        <font
+          className="reqLabel">
+          *
+        </font>
+        סיסמה
+      </label>
+      <br />
+      <TextField
+        defaultValue=""
+        disabled={false}
+        floatingLabelFixed={false}
+        fullWidth={false}
+        hintText="נא למלא שדה זה"
+        id="userpwd"
+        multiLine={false}
+        name="userpwd"
+        onChange={[Function]}
+        rows={1}
+        type="password"
+        underlineShow={true} />
+      <br />
+      <label
+        htmlFor="userpwd">
+        <font
+          className="reqLabel">
+          *
+        </font>
+        וידוא סיסמה
+      </label>
+      <br />
+      <TextField
+        defaultValue=""
+        disabled={false}
+        floatingLabelFixed={false}
+        fullWidth={false}
+        hintText="נא למלא שדה זה"
+        id="userpwd2"
+        multiLine={false}
+        name="userpwd2"
+        onChange={[Function]}
+        rows={1}
+        type="password"
+        underlineShow={true} />
+      <br />
+      <Unknown
+        formErrors={Object {}} />
+    </Dialog>
+  </div>
+</div>
+`;
+
+exports[`test renders correctly 1`] = `
+<div>
+  <div>
+    <div
+      className={undefined}
+      style={
+        Object {
+          "WebkitTapHighlightColor": "rgba(0,0,0,0)",
+          "backgroundColor": "#303030",
+          "borderRadius": 2,
+          "boxShadow": "0 1px 6px rgba(0, 0, 0, 0.12),
+                 0 1px 4px rgba(0, 0, 0, 0.12)",
+          "boxSizing": "border-box",
+          "color": "rgba(255, 255, 255, 1)",
+          "display": "inline-block",
+          "fontFamily": "Roboto, sans-serif",
+          "margin": 5,
+          "minWidth": 88,
+          "muiPrepared": true,
+          "transition": "all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms",
+        }
+      }>
+      <button
+        disabled={false}
+        href={undefined}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchStart={[Function]}
+        onTouchTap={[Function]}
+        style={
+          Object {
+            "WebkitTapHighlightColor": "rgba(0, 0, 0, 0)",
+            "backgroundColor": "#303030",
+            "border": 10,
+            "borderRadius": 2,
+            "boxSizing": "border-box",
+            "cursor": "pointer",
+            "display": "inline-block",
+            "fontFamily": "Roboto, sans-serif",
+            "fontSize": "inherit",
+            "fontWeight": "inherit",
+            "height": 36,
+            "lineHeight": "36px",
+            "margin": 0,
+            "muiPrepared": true,
+            "outline": "none",
+            "padding": 0,
+            "position": "relative",
+            "textAlign": "center",
+            "textDecoration": "none",
+            "transition": "all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms",
+            "verticalAlign": null,
+            "width": "100%",
+            "zIndex": 1,
+          }
+        }
+        tabIndex={0}
+        type="button">
+        <div
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchStart={[Function]}>
+          <div
+            style={
+              Object {
+                "backgroundColor": false,
+                "borderRadius": 2,
+                "height": 36,
+                "muiPrepared": true,
+                "top": 0,
+                "transition": "all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms",
+              }
+            }>
+            <span
+              style={
+                Object {
+                  "color": "rgba(255, 255, 255, 1)",
+                  "fontSize": 14,
+                  "fontWeight": 500,
+                  "letterSpacing": 0,
+                  "margin": 0,
+                  "muiPrepared": true,
+                  "opacity": 1,
+                  "paddingLeft": 16,
+                  "paddingRight": 16,
+                  "position": "relative",
+                  "textTransform": "uppercase",
+                  "userSelect": "none",
+                }
+              }>
+              הרשמה
+            </span>
+          </div>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`test renders shallow correctly 1`] = `
+<div>
+  <div>
+    <RaisedButton
+      disabled={false}
+      fullWidth={false}
+      label="הרשמה"
+      labelPosition="after"
+      onTouchTap={[Function]}
+      primary={false}
+      secondary={false}
+      style={
+        Object {
+          "margin": 5,
+        }
+      } />
+    <Dialog
+      actions={
+        Array [
+          <FlatButton
+            disabled={true}
+            fullWidth={false}
+            keyboardFocused={true}
+            label="אישור"
+            labelPosition="after"
+            labelStyle={Object {}}
+            onKeyboardFocus={[Function]}
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            onTouchStart={[Function]}
+            onTouchTap={[Function]}
+            primary={true}
+            secondary={false} />,
+        ]
+      }
+      actionsContainerStyle={
+        Object {
+          "textAlign": "left",
+        }
+      }
+      autoDetectWindowHeight={true}
+      autoScrollBodyContent={false}
+      modal={false}
+      onRequestClose={[Function]}
+      open={false}
+      repositionOnUpdate={true}
+      style={
+        Object {
+          "direction": "rtl",
+          "textAlign": "right",
+        }
+      }
+      title="הרשמה">
+      <label
+        htmlFor="username">
+        <font
+          className="reqLabel">
+          *
+        </font>
+        שם משתמש
+      </label>
+      <br />
+      <TextField
+        defaultValue=""
+        disabled={false}
+        floatingLabelFixed={false}
+        fullWidth={false}
+        hintText="נא למלא שדה זה"
+        id="username"
+        multiLine={false}
+        name="username"
+        onChange={[Function]}
+        rows={1}
+        type="text"
+        underlineShow={true} />
+      <br />
+      <label
+        htmlFor="email">
+        <font
+          className="reqLabel">
+          *
+        </font>
+        כתובת אימייל
+      </label>
+      <br />
+      <TextField
+        defaultValue=""
+        disabled={false}
+        floatingLabelFixed={false}
+        fullWidth={false}
+        hintText="נא למלא שדה זה"
+        id="email"
+        multiLine={false}
+        name="email"
+        onChange={[Function]}
+        rows={1}
+        type="text"
+        underlineShow={true} />
+      <br />
+      <label
+        htmlFor="userpwd">
+        <font
+          className="reqLabel">
+          *
+        </font>
+        סיסמה
+      </label>
+      <br />
+      <TextField
+        defaultValue=""
+        disabled={false}
+        floatingLabelFixed={false}
+        fullWidth={false}
+        hintText="נא למלא שדה זה"
+        id="userpwd"
+        multiLine={false}
+        name="userpwd"
+        onChange={[Function]}
+        rows={1}
+        type="password"
+        underlineShow={true} />
+      <br />
+      <label
+        htmlFor="userpwd">
+        <font
+          className="reqLabel">
+          *
+        </font>
+        וידוא סיסמה
+      </label>
+      <br />
+      <TextField
+        defaultValue=""
+        disabled={false}
+        floatingLabelFixed={false}
+        fullWidth={false}
+        hintText="נא למלא שדה זה"
+        id="userpwd2"
+        multiLine={false}
+        name="userpwd2"
+        onChange={[Function]}
+        rows={1}
+        type="password"
+        underlineShow={true} />
+      <br />
+      <Unknown
+        formErrors={Object {}} />
+    </Dialog>
+  </div>
+</div>
+`;

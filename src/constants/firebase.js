@@ -1,8 +1,8 @@
 export default {
   firebaseConfig: {
-    apiKey: "AIzaSyAZVo_sSJ9fUXvRkxd-dn4Vtt5aupl0umA",
-    authDomain: "jobsafterforty.firebaseapp.com",
-    databaseURL: "https://jobsafterforty.firebaseio.com",
-    storageBucket: 'jobsafterforty.appspot.com',
-  }
+    apiKey: 'AIzaSyCFHQkBg1J6YbL8R1JGaizpfqnG1ZTJj3w',
+    authDomain: 'jobsafterforty-staging.firebaseapp.com',
+    databaseURL: 'https://jobsafterforty-staging.firebaseio.com',
+    storageBucket: 'jobsafterforty-staging.appspot.com',
+  },
 };
