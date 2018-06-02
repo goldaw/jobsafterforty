@@ -10,7 +10,7 @@ export const listenToJobs = () => dispatch =>
     snapshot =>
       dispatch({
         type: C.JOBS_RECEIVE_DATA,
-        data: Object.keys(snapshot.val()).map(key => ({ title: snapshot.val()[key].content.position, location: snapshot.val()[key].content.location })),
+        data: Object.keys(snapshot.val()).map(key => ({ title: snapshot.val()[key].content.position, location: snapshot.val()[key].content.location, company: snapshot.val()[key].content.company })),
       }),
     error =>
       dispatch({
