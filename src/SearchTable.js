@@ -3,7 +3,7 @@ import 'react-table/react-table.css';
 import React from 'react';
 import { connect } from 'react-redux';
 
-function JobsTable(props) {
+function SearchTable(props) {
   const columns = [{
     Header: 'תפקיד',
     accessor: 'title', // String-based value accessors!
@@ -14,7 +14,7 @@ function JobsTable(props) {
   }];
   return (<ReactTable
     defaultPageSize={15}
-    data={(props.jobs instanceof Array) ? props.jobs : []}
+    data={(props.searchJobs instanceof Array) ? props.searchJobs : []}//searchJobs
     columns={columns}
     filterable
     className="-striped -highlight"
@@ -25,12 +25,11 @@ function JobsTable(props) {
 }
 
 const mapStateToProps = state => ({
-  jobs: state.jobs.data,
- //searchJobs: state.searchJobs.dataSearch,
+  searchJobs: state.searchJobs.dataSearch,//searchJobs.data1
   auth: state.auth,
 });
 
 const mapDispatchToProps = {
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(JobsTable);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchTable);

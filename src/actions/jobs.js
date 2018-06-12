@@ -2,14 +2,20 @@ import C from '../constants/jobs';
 import C_feedback from '../constants/feedback';
 import { database } from '../firebaseApp';
 
-const jobsRef = database.ref('jobs').limitToLast(100);
-
+const jobsRef = database.ref('jobs').limitToLast(15);
+const jobsSearchRef = database.ref('jobs').limitToLast(10);;
+ //jobsRef.on(
+    /*const jobsRefEx = database.ref('jobs').orderByChild('content/location').equalTo('חיפה') .on(
+        'value',
+        snapshot => console.log(snapshot.val())+console.log(snapshot) )*/
+        
 export const listenToJobs = () => dispatch =>
   jobsRef.on(
     'value',
     snapshot =>
       dispatch({
         type: C.JOBS_RECEIVE_DATA,
+       // dataSearch:Object.keys(snapshot.val()).map(key => ({ title: snapshot.val()[key].content.position, location: snapshot.val()[key].content.location })),
         data: Object.keys(snapshot.val()).map(key => ({ title: snapshot.val()[key].content.position, location: snapshot.val()[key].content.location })),
       }),
     error =>
@@ -18,6 +24,43 @@ export const listenToJobs = () => dispatch =>
         message: error.message,
       }),
   );
+  export const submitSearch = content => (dispatch, getState) => {
+    const state = getState();
+    const searchParams = {
+      content,
+      username: state.auth.username,
+      uid: state.auth.uid,
+    };
+    var categoryItem;
+    var equal;
+    var contentNames=Object.getOwnPropertyNames(content);
+    contentNames.forEach(element => {
+      var val=element;
+      if(content[val]!="")
+      {
+      categoryItem=element;
+      equal=content[val];
+      console.log(categoryItem,content[val]);
+    }
+    });
+    var tree='content/'
+   // var param=tree+content.location;
+    //=content.location;
+    jobsSearchRef.orderByChild(tree+categoryItem).equalTo(equal).on(
+        'value',
+      //snapshot => console.log(snapshot.val())+console.log(snapshot)
+      snapshot =>
+      dispatch({
+          type: C.SEARCH_RECEIVE_DATA,//data1
+          dataSearch: Object.keys(snapshot.val()).map(key => ({ title: snapshot.val()[key].content.position, location: snapshot.val()[key].content.location })),
+        }),
+      error =>
+        dispatch({
+          type: C.SEARCH_RECEIVE_DATA_ERROR,
+          message: error.message,
+        }),
+    );
+  };
 
 export const submitJob = content => (dispatch, getState) => {
   const state = getState();

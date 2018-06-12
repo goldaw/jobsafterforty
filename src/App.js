@@ -9,6 +9,8 @@ import { listenToJobs } from './actions/jobs';
 import './App.css';
 import Feedback from './feedback';
 import JobsTable from './JobsTable.js';
+import Search from './search';
+import SearchTable from './SearchTable';
 
 class App extends Component {
   componentWillMount() {
@@ -17,13 +19,13 @@ class App extends Component {
   }
   render() {
     const egCompanies = 'Faceboock,Rad,Verint,IBM';
-    const data = [{
+    /*const data = [{
       title: 'Senior Developer',
       location: 'תל אביב',
     }, {
       title: 'איש תמיכה למוקד שירות',
       location: 'תל קיבוץ אילות',
-    }];
+    }];*/
     return (
       <Provider store={store}>
         <div className="App">
@@ -37,7 +39,9 @@ class App extends Component {
               />
             </p>
             <DialogAddJob />
+            <Search/>
             <JobsTable />
+            <SearchTable/>
           </div>
           <Feedback />
 
