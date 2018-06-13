@@ -12,11 +12,8 @@ const byPropKey = (propertyName, value) => () => ({
   });
 
 const INITIAL_STATE = {
-    position: '',
-    company: '',
-    description: '',
-    location: '',
-    contact_details: '',
+    selectedcategory:'',
+    valueSearch:'',
   };
 class Search extends React.Component{
 
@@ -38,18 +35,15 @@ class Search extends React.Component{
   }
   handleSubmit() {
     store.dispatch(submitSearch({
-      position: this.state.position,
-      //company: this.state.company,
-     // description: this.state.description,
-      location: this.state.location,
-      //contact_details: this.state.contact_details,
+      selectedcategory:this.state.selectedcategory,
+      valueSearch:this.state.valueSearch,
     }));
   }
   
     render(){//to add
         const {
-            position,
-            location,
+            selectedcategory,
+            valueSearch,
           } = this.state;
       
           const actions = [
@@ -65,14 +59,14 @@ class Search extends React.Component{
             onClick={this.handleSubmit}/>
          
            <div className='inline'>
-            <input className='input-search'  type='text' id="location" name="location" 
-             defaultValue={this.state.location} onChange={(event) => { this.handleFieldChange('location', event.target.value); }} />
-            <label className='input-search'  htmlFor="location">מיקום</label>
-            </div>
-            <div className='inline'>
-            <input className='input-search' type='text' id="position" name="position"
-             defaultValue={this.state.position} onChange={(event) => { this.handleFieldChange('position', event.target.value); }} />
-            <label className='input-search'  htmlFor="position">תפקיד</label>
+           <input className='input-search'  type='text' id="valueSearch" name="valueSearch" 
+             defaultValue={this.state.valueSearch} onChange={(event) => { this.handleFieldChange('valueSearch', event.target.value); }} />
+           <select className='input-search' id="selectedcategory" defaultValue={this.state.selectedcategory} name="selectedcategory" onChange={(event)=>{this.handleFieldChange('selectedcategory',event.target.value)}}>
+            <option value="position" ></option>
+            <option value="position">תפקיד</option>
+            <option value="location">מיקום</option>
+            <option value="company">חברה</option>
+           </select>
 
            </div>
            

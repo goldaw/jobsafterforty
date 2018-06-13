@@ -26,28 +26,14 @@ export const listenToJobs = () => dispatch =>
       username: state.auth.username,
       uid: state.auth.uid,
     };
-    var categoryItem;
-    var equal;
-    var contentNames=Object.getOwnPropertyNames(content);
-    contentNames.forEach(element => {
-      var val=element;
-      if(content[val]!="")
-      {
-      categoryItem=element;
-      equal=content[val];
-      console.log(categoryItem,content[val]);
-    }
-    });
+   
     var tree='content/'
-   // var param=tree+content.location;
-    //=content.location;
-    jobsSearchRef.orderByChild(tree+categoryItem).equalTo(equal).on(
+    jobsSearchRef.orderByChild(tree+content.selectedcategory).equalTo(content.valueSearch).on(
         'value',
-      //snapshot => console.log(snapshot.val())+console.log(snapshot)
       snapshot =>
       dispatch({
           type: C.SEARCH_RECEIVE_DATA,//data1
-          dataSearch: Object.keys(snapshot.val()).map(key => ({ title: snapshot.val()[key].content.position, location: snapshot.val()[key].content.location })),
+          dataSearch: Object.keys(snapshot.val()).map(key => ({ title: snapshot.val()[key].content.position, location: snapshot.val()[key].content.location, company: snapshot.val()[key].content.company })),
         }),
       error =>
         dispatch({
