@@ -17,8 +17,7 @@ export default (state, action) => {
       return {
         ...state,
         hasReceivedData: true,
-        //data: action.dataSearch,
-       data: action.data,
+        data: action.data,//data: action.dataSearch,
         errorMessage: '',
       };
       case C.SEARCH_RECEIVE_DATA:

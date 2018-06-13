@@ -4,11 +4,7 @@ import { database } from '../firebaseApp';
 
 const jobsRef = database.ref('jobs').limitToLast(15);
 const jobsSearchRef = database.ref('jobs').limitToLast(10);;
- //jobsRef.on(
-    /*const jobsRefEx = database.ref('jobs').orderByChild('content/location').equalTo('חיפה') .on(
-        'value',
-        snapshot => console.log(snapshot.val())+console.log(snapshot) )*/
-        
+         
 export const listenToJobs = () => dispatch =>
   jobsRef.on(
     'value',

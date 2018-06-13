@@ -1,7 +1,7 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
-import { database } from './firebaseApp';//?
+import { database } from './firebaseApp';
 import { submitSearch } from './actions/jobs';
 import store from './store/index.js';
 import { connect } from 'react-redux';

@@ -26,7 +26,7 @@ function JobsTable(props) {
 
 const mapStateToProps = state => ({
   jobs: state.jobs.data,
- //searchJobs: state.searchJobs.dataSearch,
+ //searchJobs: state.searchJobs
   auth: state.auth,
 });
 

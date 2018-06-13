@@ -19,13 +19,7 @@ class App extends Component {
   }
   render() {
     const egCompanies = 'Faceboock,Rad,Verint,IBM';
-    /*const data = [{
-      title: 'Senior Developer',
-      location: 'תל אביב',
-    }, {
-      title: 'איש תמיכה למוקד שירות',
-      location: 'תל קיבוץ אילות',
-    }];*/
+    
     return (
       <Provider store={store}>
         <div className="App">
