@@ -10,7 +10,9 @@ function JobsTable(props) {
   }, {
     Header: 'מיקום',
     accessor: 'location',
-    Cell: cellProps => <span className="number">{cellProps.value}</span>, // Custom cell components!
+  }, {
+    Header: 'חברה',
+    accessor: 'company',
   }];
   return (<ReactTable
     defaultPageSize={15}

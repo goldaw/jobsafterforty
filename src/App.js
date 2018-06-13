@@ -19,7 +19,6 @@ class App extends Component {
   }
   render() {
     const egCompanies = 'Faceboock,Rad,Verint,IBM';
-    
     return (
       <Provider store={store}>
         <div className="App">
