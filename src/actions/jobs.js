@@ -2,7 +2,7 @@ import C from '../constants/jobs';
 import C_feedback from '../constants/feedback';
 import { database } from '../firebaseApp';
 
-const jobsRef = database.ref('jobs').limitToLast(100);
+const jobsRef = database.ref('jobs');
 
 export const listenToJobs = () => dispatch =>
   jobsRef.on(

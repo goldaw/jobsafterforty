@@ -4,6 +4,7 @@ import feedback from './feedback';
 import firebase from './firebase';
 import leftmenu from './leftmenu';
 import jobs from './jobs';
+import regions from './regions';
 
 export default {
   ...jobs,
@@ -11,4 +12,5 @@ export default {
   ...feedback,
   ...firebase,
   ...leftmenu,
+  ...regions,
 };
