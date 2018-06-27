@@ -25,6 +25,7 @@ const INITIAL_STATE = {
   region: '',
   jobfield: '',
   contact_details: '',
+
   formErrors: {},
   error: null,
 };
@@ -38,7 +39,7 @@ class DialogAddJob extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     store.dispatch(listenToRegions());
     store.dispatch(listenToJobFields());
   }
@@ -54,6 +55,7 @@ class DialogAddJob extends React.Component {
   }
 
   handleSubmit() {
+    if (!this.state.formValid) return;
     store.dispatch(submitJob({
       position: this.state.position,
       company: this.state.company,
@@ -63,6 +65,7 @@ class DialogAddJob extends React.Component {
       region: this.state.region,
       jobfield: this.state.jobfield,
     }));
+    this.setState(INITIAL_STATE);
     this.handleClose();
   }
 
@@ -74,7 +77,7 @@ class DialogAddJob extends React.Component {
     let locationValid = this.state.locationValid;
     let contactDetailsValid = this.state.contactDetailsValid;
     let regionValid = this.state.regionValid;
-    let jobfieldValid = this.state.jobFieldValid;
+    let jobfieldValid = this.state.jobfieldValid;
     switch (fieldName) {
       case 'position':
         positionValid = value.length >= 0;
@@ -169,7 +172,8 @@ class DialogAddJob extends React.Component {
             style={{ direction: 'rtl', textAlign: 'right' }}
             onRequestClose={this.handleClose}
           >
-            <label>{(this.props.feedback.length) ? JSON.stringify(this.props.feedback) : ''}</label><br />
+
+            {/* <label id="feedback">{(this.props.feedback.length) ? JSON.stringify(this.props.feedback) : ''}</label><br /> */}
             <label htmlFor="region"><font className="reqLabel">*</font>אזור</label><br />
             <Select
               native
