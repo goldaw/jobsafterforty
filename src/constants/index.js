@@ -5,6 +5,7 @@ import firebase from './firebase';
 import leftmenu from './leftmenu';
 import jobs from './jobs';
 import regions from './regions';
+import jobfields from './jobfields';
 
 export default {
   ...jobs,
@@ -13,4 +14,5 @@ export default {
   ...firebase,
   ...leftmenu,
   ...regions,
+  ...jobfields,
 };

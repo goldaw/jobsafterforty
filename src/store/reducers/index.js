@@ -4,6 +4,7 @@ import auth from './auth';
 import feedback from './feedback';
 import leftmenu from './leftmenu';
 import regions from './regions';
+import jobfields from './jobfields';
 
 const rootReducer = combineReducers({
   jobs,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   feedback,
   leftmenu,
   regions,
+  jobfields,
 });
 
 export default rootReducer;

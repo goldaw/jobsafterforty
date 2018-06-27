@@ -8,6 +8,7 @@ import { database } from './firebaseApp';
 import { auth } from './firebaseApp';
 import { submitJob } from './actions/jobs';
 import { listenToRegions } from './actions/regions';
+import { listenToJobFields } from './actions/jobfields';
 import store from './store/index.js';
 import { connect } from 'react-redux';
 import Select from '@material-ui/core/Select';
@@ -22,6 +23,7 @@ const INITIAL_STATE = {
   description: '',
   location: '',
   region: '',
+  jobfield: '',
   contact_details: '',
   formErrors: {},
   error: null,
@@ -38,6 +40,7 @@ class DialogAddJob extends React.Component {
 
   componentWillMount() {
     store.dispatch(listenToRegions());
+    store.dispatch(listenToJobFields());
   }
   handleFieldChange(name, value) {
     this.setState(byPropKey(name, value), () => { this.validateField(name, value); });
@@ -58,6 +61,7 @@ class DialogAddJob extends React.Component {
       location: this.state.location,
       contact_details: this.state.contact_details,
       region: this.state.region,
+      jobfield: this.state.jobfield,
     }));
     this.handleClose();
   }
@@ -70,7 +74,7 @@ class DialogAddJob extends React.Component {
     let locationValid = this.state.locationValid;
     let contactDetailsValid = this.state.contactDetailsValid;
     let regionValid = this.state.regionValid;
-    const jobFieldValid = this.state.jobFieldValid;
+    let jobfieldValid = this.state.jobFieldValid;
     switch (fieldName) {
       case 'position':
         positionValid = value.length >= 0;
@@ -96,6 +100,10 @@ class DialogAddJob extends React.Component {
         regionValid = value.length >= 0;
         fieldValidationErrors.region = regionValid ? '' : 'חובה לבחור אזור';
         break;
+      case 'jobfield':
+        jobfieldValid = value.length >= 0;
+        fieldValidationErrors.region = jobfieldValid ? '' : 'חובה לבחור תחום';
+        break;
       default:
         break;
     }
@@ -107,6 +115,7 @@ class DialogAddJob extends React.Component {
       locationValid,
       contactDetailsValid,
       regionValid,
+      jobfieldValid,
     }, this.validateForm);
   }
 
@@ -117,7 +126,8 @@ class DialogAddJob extends React.Component {
         this.state.descriptionValid &&
         this.state.locationValid &&
         this.state.contactDetailsValid &&
-        this.state.regionValid,
+        this.state.regionValid &&
+        this.state.jobfieldValid,
     });
   }
   render() {
@@ -129,6 +139,7 @@ class DialogAddJob extends React.Component {
       location,
       contact_details,
       region,
+      jobfield,
       error,
     } = this.state;
 
@@ -172,6 +183,19 @@ class DialogAddJob extends React.Component {
             >
               <option value="">בחרו אזור</option>{(this.props.regions.length) ? this.props.regions.map(makeOption) : ''}
             </Select><br />
+            <label htmlFor="jobfield"><font className="reqLabel">*</font>תחום</label><br />
+            <Select
+              native
+              onChange={(event) => {
+                this.handleFieldChange('jobfield', event.target.value);
+}}
+              value={this.state.jobfield}
+              inputProps={{
+              id: 'jobfield',
+            }}
+            >
+              <option value="">בחרו תחום</option>{(this.props.jobfields.length) ? this.props.jobfields.map(makeOption) : ''}
+            </Select><br />
             <label htmlFor="position"><font className="reqLabel">*</font>משרה</label><br />
             <TextField hintText="נא למלא שדה זה" id="position" name="position" defaultValue={this.state.position} onChange={(event) => { this.handleFieldChange('position', event.target.value); }} /><br />
             <label htmlFor="company"><font className="reqLabel">*</font>חברה</label><br />
@@ -191,7 +215,11 @@ class DialogAddJob extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({ feedback: state.feedback, regions: state.regions.data });
+const mapStateToProps = state => ({
+  feedback: state.feedback,
+  regions: state.regions.data,
+  jobfields: state.jobfields.data,
+});
 
 const mapDispatchToProps = {
   submitJob,
