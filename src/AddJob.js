@@ -46,6 +46,7 @@ class DialogAddJob extends React.Component {
   }
 
   handleSubmit() {
+  
     store.dispatch(submitJob({
       position: this.state.position,
       company: this.state.company,
@@ -54,6 +55,7 @@ class DialogAddJob extends React.Component {
       contact_details: this.state.contact_details,
     }));
     this.handleClose();
+  
   }
 
   validateField(fieldName, value) {

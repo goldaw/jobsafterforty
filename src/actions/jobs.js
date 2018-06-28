@@ -3,7 +3,7 @@ import C_feedback from '../constants/feedback';
 import { database } from '../firebaseApp';
 
 const jobsRef = database.ref('jobs').limitToLast(15);
-const jobsSearchRef = database.ref('jobs').limitToLast(10);;
+//const jobsSearchRef = database.ref('jobs').limitToLast(10);;
          
 export const listenToJobs = () => dispatch =>
   jobsRef.on(
@@ -28,11 +28,12 @@ export const listenToJobs = () => dispatch =>
     };
    
     var tree='content/'
-    jobsSearchRef.orderByChild(tree+content.selectedcategory).equalTo(content.valueSearch).on(
+    //jobsRef.orderByChild(tree+content.selectedcategory).equalTo(content.valueSearch).on(
+      jobsRef.orderByChild(tree+content.selectSearchCategory).equalTo(content.valueSearch).on(
         'value',
       snapshot =>
       dispatch({
-          type: C.SEARCH_RECEIVE_DATA,//data1
+          type: C.SEARCH_RECEIVE_DATA,
           dataSearch: Object.keys(snapshot.val()).map(key => ({ title: snapshot.val()[key].content.position, location: snapshot.val()[key].content.location, company: snapshot.val()[key].content.company })),
         }),
       error =>
@@ -80,6 +81,7 @@ export const submitJobEdit = (qid, content) => (dispatch, getState) => {
     username: state.auth.username,
     uid: state.auth.uid,
   };
+  
   dispatch({ type: C.JOB_EDIT_SUBMIT, qid });
   jobsRef.child(qid).set(job, (error) => {
     dispatch({ type: C.JOB_EDIT_FINISH, qid });

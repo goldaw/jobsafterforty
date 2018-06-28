@@ -10,7 +10,8 @@ import './App.css';
 import Feedback from './feedback';
 import JobsTable from './JobsTable.js';
 import Search from './search';
-import SearchTable from './SearchTable';
+import SearchTable from './SearchTable'; 
+//import IntegrationReactSelect from './Option';
 
 class App extends Component {
   componentWillMount() {
