@@ -5,6 +5,7 @@ import firebase from './firebase';
 import leftmenu from './leftmenu';
 import jobs from './jobs';
 import regions from './regions';
+import scopes from './scopes';
 import jobfields from './jobfields';
 
 export default {
@@ -14,5 +15,6 @@ export default {
   ...firebase,
   ...leftmenu,
   ...regions,
+  ...scopes,
   ...jobfields,
 };
