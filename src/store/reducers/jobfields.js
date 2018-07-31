@@ -2,65 +2,58 @@ import C from '../../constants';
 
 const initialState = {
   hasReceivedData: false,
-  hasReceivedData1: false,
   submittingNew: false,
   errorMessage: '',
+  selectJobField:'',
+  selectJobFieldName:'',
   data: {},
-  dataSearch:{},
   status: {},
 };
 
 export default (state, action) => {
   let newState;
   switch (action.type) {
-    case C.JOBS_RECEIVE_DATA:
+    case C.JOBFIELDS_RECEIVE_DATA:
       return {
         ...state,
         hasReceivedData: true,
-        data: action.data,//data: action.dataSearch,
+        data: action.data,
         errorMessage: '',
       };
-      case C.SEARCH_RECEIVE_DATA:
-      return {
-        ...state,
-        hasReceivedData: true,
-        dataSearch: action.dataSearch,
-        errorMessage: '',
-      };
-    case C.JOBS_RECEIVE_DATA_ERROR:
+    case C.JOBFIELDS_RECEIVE_DATA_ERROR:
       return {
         ...state,
         data: null,
         errorMessage: action.message,
       };
-      case C.SEARCH_RECEIVE_DATA_ERROR:
-      return {
-        ...state,
-        dataSearch: null,
-        errorMessage: action.message,
-      };
-    case C.JOB_AWAIT_CREATION_RESPONSE:
+    case C.JOBFIELD_AWAIT_CREATION_RESPONSE:
       return {
         ...state,
         submittingNew: true,
       };
-    case C.JOB_RECEIVE_CREATION_RESPONSE:
+    case C.JOBFIELD_RECEIVE_CREATION_RESPONSE:
       return {
         ...state,
         submittingNew: false,
       };
-    case C.JOB_EDIT:
+    case C.JOBFIELD_EDIT:
       newState = { ...state };
-      newState.status[action.qid] = C.JOB_EDITING;
+      newState.status[action.qid] = C.JOBFIELD_EDITING;
       return newState;
-    case C.JOB_EDIT_FINISH:
+    case C.JOBFIELD_EDIT_FINISH:
       newState = { ...state };
       delete newState.status[action.qid];
       return newState;
-    case C.JOB_EDIT_SUBMIT:
+    case C.JOBFIELD_EDIT_SUBMIT:
       newState = { ...state };
-      newState.status[action.qid] = C.JOB_SUBMITTING;
+      newState.status[action.qid] = C.JOBFIELD_SUBMITTING;
       return newState;
+    case C.CHOOSE_JOBFIELD:
+     return{
+       ...state,
+       selectJobField:action.selectJobField,
+       selectJobFieldName:action.selectJobFieldName,
+     };  
     default:
       return state || initialState;
   }

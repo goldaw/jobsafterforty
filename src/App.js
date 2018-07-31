@@ -2,6 +2,8 @@
 import { FormattedMessage } from 'react-intl';
 import JafAppBar from './Appbar';
 import DialogAddJob from './AddJob';
+import DialogAddRegion from './Addregion';
+import DialogAddJobField from './Addjobfield';
 import { Provider } from 'react-redux';
 import store from './store/index.js';
 import { listenToAuth } from './actions/auth';
@@ -32,8 +34,8 @@ class App extends Component {
                 values={{ egCompanies: <b dir="rtl">{egCompanies}</b> }}
               />
             </p>
-            <DialogAddJob />
             <Search/>
+            <DialogAddJob /><DialogAddRegion /><DialogAddJobField />
             <JobsTable />
             <SearchTable/>
           </div>

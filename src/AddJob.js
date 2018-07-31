@@ -7,8 +7,11 @@ import { FormErrors } from './FormErrors';
 import { database } from './firebaseApp';
 import { auth } from './firebaseApp';
 import { submitJob } from './actions/jobs';
+import { listenToRegions } from './actions/regions';
+import { listenToJobFields } from './actions/jobfields';
 import store from './store/index.js';
 import { connect } from 'react-redux';
+import Select from '@material-ui/core/Select';
 
 const byPropKey = (propertyName, value) => () => ({
   [propertyName]: value,
@@ -19,6 +22,8 @@ const INITIAL_STATE = {
   company: '',
   description: '',
   location: '',
+  region: '',
+  jobfield: '',
   contact_details: '',
   formErrors: {},
   error: null,
@@ -33,7 +38,10 @@ class DialogAddJob extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-
+  componentDidMount() {
+    store.dispatch(listenToRegions());
+    store.dispatch(listenToJobFields());
+  }
   handleFieldChange(name, value) {
     this.setState(byPropKey(name, value), () => { this.validateField(name, value); });
   }
@@ -46,14 +54,17 @@ class DialogAddJob extends React.Component {
   }
 
   handleSubmit() {
-  
+    if (!this.state.formValid) return;
     store.dispatch(submitJob({
       position: this.state.position,
       company: this.state.company,
       description: this.state.description,
       location: this.state.location,
       contact_details: this.state.contact_details,
+      region: this.state.region,
+      jobfield: this.state.jobfield,
     }));
+    this.setState(INITIAL_STATE);
     this.handleClose();
   
   }
@@ -65,7 +76,8 @@ class DialogAddJob extends React.Component {
     let descriptionValid = this.state.descriptionValid;
     let locationValid = this.state.locationValid;
     let contactDetailsValid = this.state.contactDetailsValid;
-
+    let regionValid = this.state.regionValid;
+    let jobfieldValid = this.state.jobfieldValid;
     switch (fieldName) {
       case 'position':
         positionValid = value.length >= 0;
@@ -87,6 +99,14 @@ class DialogAddJob extends React.Component {
         contactDetailsValid = value.length >= 0;
         fieldValidationErrors.contact_details = contactDetailsValid ? '' : 'חובה למלא פרטי התקשרות';
         break;
+      case 'region':
+        regionValid = value.length >= 0;
+        fieldValidationErrors.region = regionValid ? '' : 'חובה לבחור אזור';
+        break;
+      case 'jobfield':
+        jobfieldValid = value.length >= 0;
+        fieldValidationErrors.region = jobfieldValid ? '' : 'חובה לבחור תחום';
+        break;
       default:
         break;
     }
@@ -97,6 +117,8 @@ class DialogAddJob extends React.Component {
       descriptionValid,
       locationValid,
       contactDetailsValid,
+      regionValid,
+      jobfieldValid,
     }, this.validateForm);
   }
 
@@ -106,7 +128,9 @@ class DialogAddJob extends React.Component {
         this.state.companyValid &&
         this.state.descriptionValid &&
         this.state.locationValid &&
-        this.state.contactDetailsValid,
+        this.state.contactDetailsValid &&
+        this.state.regionValid &&
+        this.state.jobfieldValid,
     });
   }
   render() {
@@ -117,6 +141,8 @@ class DialogAddJob extends React.Component {
       description,
       location,
       contact_details,
+      region,
+      jobfield,
       error,
     } = this.state;
 
@@ -129,6 +155,10 @@ class DialogAddJob extends React.Component {
         onTouchTap={this.handleSubmit}
       />,
     ];
+
+    function makeOption(item) {
+      return <option key={item.uid} value={item.uid} dir="rtl" align="right">{item.name}</option>;
+    }
     return (
       <div>
         <div>
@@ -142,7 +172,34 @@ class DialogAddJob extends React.Component {
             style={{ direction: 'rtl', textAlign: 'right' }}
             onRequestClose={this.handleClose}
           >
-            <label>{(this.props.feedback.length) ? JSON.stringify(this.props.feedback) : ''}</label><br />
+
+            {/* <label id="feedback">{(this.props.feedback.length) ? JSON.stringify(this.props.feedback) : ''}</label><br /> */}
+            <label htmlFor="region"><font className="reqLabel">*</font>אזור</label><br />
+            <Select
+              native
+              onChange={(event) => {
+                this.handleFieldChange('region', event.target.value);
+}}
+              value={this.state.region}
+              inputProps={{
+              id: 'region',
+            }}
+            >
+              <option value="">בחרו אזור</option>{(this.props.regions.length) ? this.props.regions.map(makeOption) : ''}
+            </Select><br />
+            <label htmlFor="jobfield"><font className="reqLabel">*</font>תחום</label><br />
+            <Select
+              native
+              onChange={(event) => {
+                this.handleFieldChange('jobfield', event.target.value);
+}}
+              value={this.state.jobfield}
+              inputProps={{
+              id: 'jobfield',
+            }}
+            >
+              <option value="">בחרו תחום</option>{(this.props.jobfields.length) ? this.props.jobfields.map(makeOption) : ''}
+            </Select><br />
             <label htmlFor="position"><font className="reqLabel">*</font>משרה</label><br />
             <TextField hintText="נא למלא שדה זה" id="position" name="position" defaultValue={this.state.position} onChange={(event) => { this.handleFieldChange('position', event.target.value); }} /><br />
             <label htmlFor="company"><font className="reqLabel">*</font>חברה</label><br />
@@ -154,6 +211,7 @@ class DialogAddJob extends React.Component {
             <label htmlFor="contact_details"><font className="reqLabel">*</font>פרטי התקשרות</label><br />
             <TextField hintText="נא למלא שדה זה" id="contact_details" name="contact_details" defaultValue={this.state.contact_details} onChange={(event) => { this.handleFieldChange('contact_details', event.target.value); }} /><br />
             <FormErrors formErrors={this.state.formErrors} />
+
           </Dialog>
         </div>
       </div>
@@ -161,7 +219,11 @@ class DialogAddJob extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({ feedback: state.feedback });
+const mapStateToProps = state => ({
+  feedback: state.feedback,
+  regions: state.regions.data,
+  jobfields: state.jobfields.data,
+});
 
 const mapDispatchToProps = {
   submitJob,

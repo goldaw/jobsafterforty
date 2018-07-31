@@ -16,6 +16,7 @@ function SearchTable(props) {
     accessor: 'company',
   }];
 
+  
   return (<ReactTable
     defaultPageSize={15}
     data={(props.searchJobs instanceof Array) ? props.searchJobs : []}//searchJobs
