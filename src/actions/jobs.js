@@ -51,39 +51,37 @@ export const listenToJobs = () => dispatch =>
       snapshot =>
       dispatch({
           type: C.SEARCH_RECEIVE_DATA,
-       //   dataSearch: Object.keys(snapshot.val()).map(key => ({ title: snapshot.val()[key].content.position, location: snapshot.val()[key].content.location, company: snapshot.val()[key].content.company })),
          /* dataSearch: Object.keys(snapshot.val()).filter(elem=>snapshot.val()[elem].content.region==content.selectRegion)
           .map(key => ({ title: snapshot.val()[key].content.position, location: snapshot.val()[key].content.location, company: snapshot.val()[key].content.company })),
          */
-         //content.selectRole!=''?
+         //checkedScopesArrId
           dataSearch:Object.keys(snapshot.val())
           .filter((key => {
-              let bKeep = true;
-              let bKeep2=true;
+              let filterJobField = true;
+              let filterRegion=true;
+              let filterScope=true;
               const elem = snapshot.val()[key];
-              if(content.checkedArr&&content.checkedArr[0] && elem.content.position!==content.checkedArr[0])
-                bKeep=false;   
+               if(typeof (content.checkedArr)&&!(content.checkedArr.includes(elem.content.position)))
+                filterJobField=false; 
+
+              if(typeof (content.checkedRegionsArrId)&&!(content.checkedRegionsArrId.includes(elem.content.region)))
+                filterRegion=false;  
+                
+              if(content.checkedScopesArrId!==""&&!(content.checkedScopesArrId.includes(elem.content.scope)))  
+                filterScope=false;  
+
+              /*if(content.checkedArr&&content.checkedArr[0] && elem.content.position!==content.checkedArr[0])
+                filterJobField=false; 
                   //return false
-               if(typeof (content.selectRegion)!="undefined" && elem.content.region !== content.selectRegion)   
-                  bKeep2=false;  
-               return bKeep&&bKeep2;
+              if(typeof (content.checkedRegionsArrId&&content.checkedRegionsArrId[0])!="undefined" && elem.content.region !== content.checkedRegionsArrId[0])   
+                  filterRegion=false; 
+               if(typeof (content.checkedScopesArrId&&content.checkedScopesArrId[0])!="undefined" && elem.content.scope !== content.checkedScopesArrId[0])   
+                  filterScope=false;  */ 
+               return filterJobField&&filterRegion&&filterScope;
           }))
-          /*.filter((key => {
-            let bKeep = true;
-            const elem = snapshot.val()[key];
-            if(typeof (content.selectRegion)!="undefined" && elem.content.region !== content.selectRegion)
-             // bKeep=false;   
-                return false
-            return bKeep;
-        }))*/
-         /* .filter(elem=>content.checkedArr&&content.checkedArr[0]?
-           snapshot.val()[elem].content.position==content.checkedArr[0]
-           :Object.keys(snapshot.val()))*/
-       
-      
            // .filter(elem=>snapshot.val()[elem].content.position==content.selectRole) 
-        //.filter(elem=>content.selectRegion!=undefined?
-        // snapshot.val()[elem].content.region==content.selectRegion:Object.keys(snapshot.val()))
+           //.filter(elem=>content.selectRegion!=undefined?
+          // snapshot.val()[elem].content.region==content.selectRegion:Object.keys(snapshot.val()))
           .map(key => ({ title: snapshot.val()[key].content.position, location: snapshot.val()[key].content.location, 
           company: snapshot.val()[key].content.company })),
          // datafilter:snapshot.val(),

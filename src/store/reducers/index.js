@@ -5,6 +5,7 @@ import auth from './auth';
 import feedback from './feedback';
 import leftmenu from './leftmenu';
 import regions from './regions';
+import scopes from './scopes';
 import jobfields from './jobfields';
 //import SearchRegion from './SearchRegion';
 
@@ -15,8 +16,8 @@ const rootReducer = combineReducers({
   feedback,
   leftmenu,
   regions,
+  scopes,
   jobfields,
-  //selectRegion,
 });
 
 

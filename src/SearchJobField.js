@@ -10,10 +10,6 @@ import green from '@material-ui/core/colors/green';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-//import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
-//import CheckBoxIcon from '@material-ui/icons/CheckBox';
-//import Favorite from '@material-ui/icons/Favorite';
-//import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import searchItems from './searchItems';
 import {chooseJobField} from './actions/jobfields';
 import './search.css';
@@ -81,9 +77,16 @@ class DialogCooseJobField extends React.Component{
         this.handleSelectJobFieldChange=this.handleSelectJobFieldChange.bind(this);
         this.makeJobField=this.makeJobField.bind(this);
         this.handlesubmit=this.handlesubmit.bind(this);
+        this.handlecClean=this.handlecClean.bind(this);
     }
     componentDidMount() {
         store.dispatch(listenToJobFields());
+    }
+    handlecClean(){
+        store.dispatch(chooseJobField({
+            selectJobField:'',
+            selectJobFieldName:'',
+        })); 
     }
     handleOpen(){
         
@@ -105,8 +108,12 @@ class DialogCooseJobField extends React.Component{
     selectJobField:e.id,
     selectJobFieldName:e.value,
     });
-    if(this.state.open==true)
-        this.handleClose;
+    this.handleClose();
+    store.dispatch(chooseJobField({
+        selectJobField:e.id,
+        selectJobFieldName:e.value,
+    }));
+    
     }
 
     makeJobField(item){
@@ -127,16 +134,7 @@ handlesubmit(){
             selectJobField,
             selectJobFieldName,
         }=this.state;
-         const actions = [
-      <FlatButton
-        label="אישור"
-        primary
-        //disabled={!this.state.formValid}
-        keyboardFocused
-        onTouchTap={this.handleClose}
-        onClick={this.handlesubmit}
-      />,
-    ];
+     
         return(
              <div style={{ display:'inline-block' }}>
              <MuiThemeProvider theme={theme}>
@@ -146,26 +144,18 @@ handlesubmit(){
                onClick={this.handleOpen} >בחר תחום</Button>
                 </MuiThemeProvider>
                 <Dialog style={{direction:'rtl',textAlign:'rtl'}} onClose={this.handleClose} aria-labelledby="simple-dialog-title"
-      open={this.state.open}
-     >
-        <DialogTitle id="simple-dialog-title">בחר תחום</DialogTitle>
-
-              {/* <Dialog
-                 title="בחר תחום"
-                 actions={actions}
-                 modal={false}
                  open={this.state.open}
-                 actionsContainerStyle={{ textAlign: 'left' }}
-                 style={{ direction: 'rtl', textAlign: 'right' }}
-                 onRequestClose={this.handleClose}
-               >  */}
-               {/*} <div>{Object.keys(this.state.jobFields).length ? Object.keys(this.state.jobFields).map(this.makeJobField):''}</div> */}
-                <div>{this.props.jobFields.length ?this.props.jobFields.map(this.makeJobField):''}</div> 
-            <div> 
-              <Button className="btnOk" onClick={this.handlesubmit} 
-              style={{float:'left', color: '#4da6ff',border: '#4da6ff solid 2px',margin:9}}>בחר</Button>
-            </div>
+                >
 
+             {/*<DialogTitle style={{display:'inline-block'}} id="simple-dialog-title">בחר תחום</DialogTitle>*/}
+             <div>
+             <Button className="btnOk" onClick={this.handlecClean} 
+              style={{float:'right', color: '#4da6ff',border: '#4da6ff solid 2px',margin:9}}>נקה בחירה</Button>
+
+             <input type='button'  className='closeBtn' onClick={this.handleClose} 
+               value='X'/>
+              </div>
+              <div className='wrapElem'>{this.props.jobFields.length ?this.props.jobFields.map(this.makeJobField):''}</div> 
                </Dialog>
              </div>
             

@@ -44,8 +44,8 @@ export const submitRegion = content => (dispatch, getState) => {
 };
 
 
-export const chooseRegion = (selectRegion,selectRegionName) => dispatch =>
-  dispatch({type:C.CHOOSE_EREGION,selectRegion,selectRegionName});
+export const chooseRegion = (checkedRegionsArrId,checkedRegionsArrName) => dispatch =>
+  dispatch({type:C.CHOOSE_EREGION,checkedRegionsArrId,checkedRegionsArrName});
 
 
 export const startRegionEdit = qid => dispatch =>

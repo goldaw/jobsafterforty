@@ -8,6 +8,7 @@ import { database } from './firebaseApp';
 import { auth } from './firebaseApp';
 import { submitJob } from './actions/jobs';
 import { listenToRegions } from './actions/regions';
+import { listenToScopes } from './actions/scopes';
 import { listenToJobFields } from './actions/jobfields';
 import store from './store/index.js';
 import { connect } from 'react-redux';
@@ -23,6 +24,7 @@ const INITIAL_STATE = {
   description: '',
   location: '',
   region: '',
+  scope: '',
   jobfield: '',
   contact_details: '',
   formErrors: {},
@@ -39,6 +41,7 @@ class DialogAddJob extends React.Component {
   }
 
   componentDidMount() {
+    store.dispatch(listenToScopes());
     store.dispatch(listenToRegions());
     store.dispatch(listenToJobFields());
   }
@@ -62,6 +65,7 @@ class DialogAddJob extends React.Component {
       location: this.state.location,
       contact_details: this.state.contact_details,
       region: this.state.region,
+      scope: this.state.scope,
       jobfield: this.state.jobfield,
     }));
     this.setState(INITIAL_STATE);
@@ -77,6 +81,7 @@ class DialogAddJob extends React.Component {
     let locationValid = this.state.locationValid;
     let contactDetailsValid = this.state.contactDetailsValid;
     let regionValid = this.state.regionValid;
+    let scopeValid = this.state.scopeValid;
     let jobfieldValid = this.state.jobfieldValid;
     switch (fieldName) {
       case 'position':
@@ -103,6 +108,10 @@ class DialogAddJob extends React.Component {
         regionValid = value.length >= 0;
         fieldValidationErrors.region = regionValid ? '' : 'חובה לבחור אזור';
         break;
+      case 'scope':
+        scopeValid = value.length >= 0;
+        fieldValidationErrors.scope = scopeValid ? '' : 'חובה לבחור היקף משרה';
+        break;
       case 'jobfield':
         jobfieldValid = value.length >= 0;
         fieldValidationErrors.region = jobfieldValid ? '' : 'חובה לבחור תחום';
@@ -118,6 +127,7 @@ class DialogAddJob extends React.Component {
       locationValid,
       contactDetailsValid,
       regionValid,
+      scopeValid,
       jobfieldValid,
     }, this.validateForm);
   }
@@ -130,6 +140,7 @@ class DialogAddJob extends React.Component {
         this.state.locationValid &&
         this.state.contactDetailsValid &&
         this.state.regionValid &&
+        this.state.scopeValid &&
         this.state.jobfieldValid,
     });
   }
@@ -142,6 +153,7 @@ class DialogAddJob extends React.Component {
       location,
       contact_details,
       region,
+      scope,
       jobfield,
       error,
     } = this.state;
@@ -187,6 +199,20 @@ class DialogAddJob extends React.Component {
             >
               <option value="">בחרו אזור</option>{(this.props.regions.length) ? this.props.regions.map(makeOption) : ''}
             </Select><br />
+            <label htmlFor="scope"><font className="reqLabel">*</font>היקף משרה</label><br />
+            <Select
+              native
+              onChange={(event) => {
+                this.handleFieldChange('scope', event.target.value);
+}}
+              value={this.state.scope}
+              inputProps={{
+              id: 'scope',
+            }}
+            >
+              <option value="">בחרו היקף משרה</option>{(this.props.scopes && this.props.scopes.length) ? this.props.scopes.map(makeOption) : ''}
+            </Select><br />
+
             <label htmlFor="jobfield"><font className="reqLabel">*</font>תחום</label><br />
             <Select
               native
@@ -222,6 +248,7 @@ class DialogAddJob extends React.Component {
 const mapStateToProps = state => ({
   feedback: state.feedback,
   regions: state.regions.data,
+  scopes: state.scopes.data,
   jobfields: state.jobfields.data,
 });
 

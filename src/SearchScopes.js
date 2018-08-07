@@ -1,5 +1,4 @@
 import React from 'react';
-// Dialog from 'material-ui/Dialog';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
@@ -8,12 +7,11 @@ import FlatButton from 'material-ui/FlatButton';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import green from '@material-ui/core/colors/green';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import {chooseRegion} from './actions/regions';
-import { listenToRegions } from './actions/regions';
+import {chooseScopes} from './actions/scopes';
+import { listenToScopes } from './actions/scopes';
 import './search.css';
 import store from './store/index.js';
 import { connect } from 'react-redux';
@@ -57,22 +55,21 @@ const byPropkey=(propertyName,value)=>()=>(
     })
 const INITIAL_STATE={
     open:false,
-   // regions:regionItems.regions,
-    checkedRegionsArrId:[],
-    checkedRegionsArrName:[],
+    checkedScopesArrId:[],
+    checkedScopesArrName:[],
 } ;   
 
-class DialogCooseRegion extends React.Component{
+class DialogSearchScopes extends React.Component{
     constructor(props){
         super(props);
         this.state={...INITIAL_STATE};
         this.handleOpen=this.handleOpen.bind(this);
         this.handleClose=this.handleClose.bind(this);
-        this.handlesubmitRegion=this.handlesubmitRegion.bind(this);
+        this.handlesubmit=this.handlesubmit.bind(this);
         this.handleCheckChange=this.handleCheckChange.bind(this);
     }
     componentDidMount(){
-        store.dispatch(listenToRegions());
+        store.dispatch(listenToScopes());
     }
     handleOpen(){
         this.setState({open:true});
@@ -80,41 +77,40 @@ class DialogCooseRegion extends React.Component{
     handleClose(){
         this.setState({open:false});
     }
-
     handleCheckChange(name,target){
-        const checkedRegionsArrId = this.state.checkedRegionsArrId
-        const checkedRegionsArrName=this.state.checkedRegionsArrName
+        const checkedScopesArrId = this.state.checkedScopesArrId
+        const checkedScopesArrName=this.state.checkedScopesArrName
           let indexName
           let indexId
           if (target.checked) {
-            checkedRegionsArrId.push(target.id)
-            checkedRegionsArrName.push(target.value)
+            checkedScopesArrId.push(target.id)
+            checkedScopesArrName.push(target.value)
           } else {
-            indexName = checkedRegionsArrId.indexOf(target.id)
-            indexId=checkedRegionsArrName.indexOf(target.value)
-            checkedRegionsArrId.splice(indexId, 1)
-            checkedRegionsArrName.splice(indexName,1)
+            indexName = checkedScopesArrId.indexOf(target.id)
+            indexId=checkedScopesArrName.indexOf(target.value)
+            checkedScopesArrId.splice(indexId, 1)
+            checkedScopesArrName.splice(indexName,1)
           }
           this.setState({ 
-              checkedRegionsArrId: checkedRegionsArrId,
-              checkedRegionsArrName:checkedRegionsArrName,
+            checkedScopesArrId: checkedScopesArrId,
+            checkedScopesArrName:checkedScopesArrName,
          })
       }
-       
-    handlesubmitRegion(){
-        this.handleClose();
-        store.dispatch(chooseRegion({
-            checkedRegionsArrId:this.state.checkedRegionsArrId,
-            checkedRegionsArrName:this.state.checkedRegionsArrName,
-        }));
-    }
+  
+handlesubmit(){
+    this.handleClose();
+    store.dispatch(chooseScopes({
+        checkedScopesArrId:this.state.checkedScopesArrId,
+        checkedScopesArrName:this.state.checkedScopesArrName,
+    }));
+}
     render(){
 
         const {
             open,
             name,
-            checkedRegionsArrId,
-            checkedRegionsArrName,
+            //checkedScopesArrId,
+            //checkedScopesArrName,
         }=this.state;
          const actions = [
      {/* <FlatButton
@@ -123,17 +119,15 @@ class DialogCooseRegion extends React.Component{
         //disabled={!this.state.formValid}
         keyboardFocused
         onTouchTap={this.handleClose}
-        onClick={this.handlesubmitRegion}
+        onClick={this.handlesubmit}
      />,*/}
     ];
         return(
              <div style={{ display:'inline-block' }}>
              <MuiThemeProvider theme={theme}>
                <Button 
-              // buttonStyle={{borderRadius:50}}
-              // style={{ margin: 15,borderRadius:50,height:94,width: 94}}
                 onClick={this.handleOpen} 
-                disabled={this.props&&!this.props.selectJobField}>בחר אזור</Button>
+                disabled={this.props&&!this.props.selectJobField}>היקף מישרה</Button>
                 </MuiThemeProvider>
                 <Dialog style={{direction:'rtl',textAlign:'rtl'}} onClose={this.handleClose} aria-labelledby="simple-dialog-title"
                open={this.state.open}
@@ -149,16 +143,17 @@ class DialogCooseRegion extends React.Component{
                  onRequestClose={this.handleClose}
                > */}   
                 <div>
-               {
-               (this.props.regions instanceof Array)?this.props.regions
+                {
+               (this.props.scopes instanceof Array)?this.props.scopes
                .map((item)=><div><FormControlLabel control={<Checkbox color='primary' 
-               checked={this.state.checkedRegionsArrId.indexOf(item.uid)>-1?true:false}
+               
+               checked={(this.state.checkedScopesArrId.indexOf(item.uid)>-1)?true:false}
                 className='dialogSearchBtn' id={item.uid} value={item.name} 
                onClick={(event)=>{this.handleCheckChange(item,event.target)}}/>} label={item.name}/></div>):''
-               }
+               }    
                 </div> 
                 <div> 
-              <Button className="btnOk" onClick={this.handlesubmitRegion} 
+              <Button className="btnOk" onClick={this.handlesubmit} 
               style={{float:'left', color: '#4da6ff',border: '#4da6ff solid 2px',margin:9}}>בחר</Button>
             </div>
                </Dialog>
@@ -170,13 +165,13 @@ class DialogCooseRegion extends React.Component{
 
 const mapStateToProps = state => ({
      feedback: state.feedback,
-     regions:state.regions.data,
+     scopes:state.scopes.data,
      selectJobField:state.jobfields.selectJobField,
 
     });
 
 const mapDispatchToProps = {
-  chooseRegion,
+    chooseScopes,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DialogCooseRegion)
+export default connect(mapStateToProps, mapDispatchToProps)(DialogSearchScopes)

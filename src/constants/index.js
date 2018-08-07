@@ -7,10 +7,10 @@ import leftmenu from './leftmenu';
 import jobs from './jobs';
 import searchJobs from './jobs';
 import regions from './regions';
+import scopes from './scopes';
 import jobfields from './jobfields';
 
 export default {
-  //...selectRegion
   ...jobs,
   ...searchJobs,
   ...auth,
@@ -18,5 +18,6 @@ export default {
   ...firebase,
   ...leftmenu,
   ...regions,
+  ...scopes,
   ...jobfields,
 };

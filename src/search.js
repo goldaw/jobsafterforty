@@ -25,11 +25,13 @@ import 'react-select/dist/react-select.css';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import DialogCooseRegion from './SearchRegion';
+import DialogSearchScopes from './SearchScopes';
 import DialogCooseJobField from './SearchJobField';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { blue600 } from 'material-ui/styles/colors';
+import {chooseJobField} from './actions/jobfields';
 
 
 const theme = createMuiTheme({
@@ -104,6 +106,7 @@ class Search extends React.Component{
     this.handleCheckChange=this.handleCheckChange.bind(this);
     this.handleSelectChange=this.handleSelectChange.bind(this);
     this.makeArrRoles=this.makeArrRoles.bind(this);
+    this.handleClean=this.handleClean.bind(this);
     this.obj=[];
    // this.handleChange=this.handleChange.bind(this);
     //var itemsToFill='';
@@ -111,6 +114,9 @@ class Search extends React.Component{
 
 handleOpen() {
   this.setState({ open: true });
+}
+handleClean(){
+
 }
 handleOpenDialog()
 {
@@ -134,35 +140,14 @@ handleCheckChange(name,target){
       checkedArr.splice(index, 1)
     }
     this.setState({ checkedArr: checkedArr })
-
-
-  const items = this.state.selectRolesArr;
-  //items[name] =value;
-
-  // update state
- /* this.setState({
-    selectRolesArr:items
-  })*/
 }
 makeArrRoles()
 {
- // var roles=this.props.selectJobField.selectJobFieldName&&this.state.adminRoles[this.props.selectJobField.selectJobFieldName]?
-  //this.state.adminRoles[this.props.selectJobField.selectJobFieldName]:'';
-
- // this.obj=roles.map(ele1=>new object( [ele1]=false));
   console.log('obj');
   console.log(this.obj);
-//var try=roles.map(ele=>ele=false);
   var rolesArray = new Map()
-  /*roles.forEach(element => {
-  rolesArray.set(element,false)
-  });*/
   this.setState({selectRolesArr:rolesArray});
   console.log(rolesArray);
-  //console.log(rolesArray.get('ניהול אומנות'));
-  /*var x2=roles.map((key)=>{key:false});
-  console.log(x2);
-  console.log(x2['ניהול אומנות']);*/
 }
 /*handleChange(name, value) {
   this.setState(byPropKey(name, value),);// () => { this.validateField(name, value); }
@@ -171,9 +156,6 @@ makeArrRoles()
 
 handleSelectChange(name,value)
 {
- /* if(value=='בחר תחום')
-    this.setState(byPropKey(name, 'allCategories'));// () => { this.validateField(name, value); }
- else*/ 
     this.setState(byPropKey(name, value),);// () => { this.validateField(name, value); }
  let jsonTofill=value;
   this.setState({
@@ -245,15 +227,13 @@ validateForm() {
 
     
     store.dispatch(submitSearch({
-     // selectedJobField:this.state.selectedJobField,
      checkedArr:this.state.checkedArr,
-     // selectRole:this.state.selectRole,
-      selectRegion:this.props.selectRegion,
-      selectRegionName:this.props.selectRegionName,
       selectJobField:this.props.selectJobField.selectJobField,
       selectJobFieldName:this.props.selectJobField.selectJobFieldName,
-      //region
-      //valueSearchCategory:this.state.valueSearchCategory,
+      checkedRegionsArrId:this.props.checkedRegionsArrId,
+      checkedRegionsArrName:this.props.checkedRegionsArrName,
+      checkedScopesArrId:this.props.checkedScopesArrId,
+      checkedScopesArrName:this.props.checkedScopesArrName,
     valueSearch:this.state.valueSearch,
     }));
   }
@@ -265,9 +245,10 @@ validateForm() {
             selectRole,
             selectJobField,
             selectJobFieldName,
-            selectRegion,
-            selectRegionName,
-            //selectedJobField,
+            checkedScopesArrName,
+            checkedScopesArrId,
+            checkedRegionsArrName,
+            checkedRegionsArrId,
             valueSearch,
             error,
           } = this.state;
@@ -287,7 +268,16 @@ validateForm() {
         <form onSubmit={e => {
           e.preventDefault()
           }}>
+          <div>
+          <input type='button' className="closeBtn" onClick={this.handleClose} 
+               value='X'/>
+          <input type='button' className="cleanBtn" onClick={this.handleClean} 
+               value='נקה הגדרות חיפוש'/>
+
+           </div>
+
           <div className='search-area'>
+
            <div className='inline search-type'>
            <div className='searchBtnWrap'>
           <Button   style={{borderRadius:17}} variant='contained' onClick={this.handleSubmit} >חפש</Button>
@@ -298,9 +288,9 @@ validateForm() {
             onChange={(event) => { this.handleFieldChange('valueSearch', event.target.value); }} />*/}
          </div>
           <div className='wrapSearchBtns'>
+          <DialogSearchScopes className='searchBtns'/>
           <DialogCooseRegion className='searchBtns'/>
-          <DialogCooseRegion className='searchBtns'/>
-          <MuiThemeProvider  theme={theme}>{/*style={{borderRadius:17}} variant='contained'*/}
+          <MuiThemeProvider  theme={theme}>
           <Button 
            disabled={this.props&&!this.props.selectJobField}
             onClick={this.handleOpenDialog}
@@ -319,20 +309,27 @@ validateForm() {
             
         <div className='searchRow2'>
            <div className='searchChoose'>
+           <div className='wrapchoose'>
            {this.props.selectJobField?<div className='searchChoose-jobfield'>
              <label value={this.props.selectJobField.selectJobFieldName}>{this.props.selectJobField.selectJobFieldName}</label>
            </div>:null}
-    
+          </div>
+          <div className='wrapchoose'>
             {this.state.checkedArr.length>0?this.state.checkedArr.map((item)=><div className='searchChoose-role'>
              <label value={this.state.selectRole}>{item}</label>
         </div>):null}
-           {this.props.selectRegionName?<div className='searchChoose-region'>
-             <label value={this.props.selectRegionName}>{this.props.selectRegionName}</label>
-           </div>:null}
-          {this.props.selectJobField?<div className='searchChoose-jobfield'>
-             <label value={this.props.selectJobField.selectJobFieldName}>{this.props.selectJobField.selectJobFieldName}</label>
+          </div>
+          <div className='wrapchoose'>
+         {this.props.checkedRegionsArrName?
+          this.props.checkedRegionsArrName.map((item)=><div className='searchChoose-region'>
+             <label value={item}>{item}</label>
+         </div>):null}
+         </div>
+         <div className='wrapchoose'>
+          {this.props.checkedScopesArrName?<div className='searchChoose-scopes'>
+             <label value={this.props.checkedScopesArrName[0]}>{this.props.checkedScopesArrName[0]}</label>
           </div>:null}
-
+        </div>
           </div>
           <FormErrors formErrors={this.state.formErrors} />            
            </div>
@@ -374,10 +371,12 @@ validateForm() {
     }
 }
 const mapStateToProps = state =>({
-selectRegion:state.regions.selectRegion.selectRegion,
-selectRegionName:state.regions.selectRegion.selectRegionName,
 selectJobField:state.jobfields.selectJobField,
 selectJobFieldName:state.jobfields.selectJobFieldName,
+checkedRegionsArrId:state.regions.checkedRegionsArrId&&state.regions.checkedRegionsArrId.checkedRegionsArrId?state.regions.checkedRegionsArrId.checkedRegionsArrId:'',
+checkedRegionsArrName:state.regions.checkedRegionsArrId&&state.regions.checkedRegionsArrId.checkedRegionsArrName?state.regions.checkedRegionsArrId.checkedRegionsArrName:'',
+checkedScopesArrId:state.scopes.checkedScopesArrId&&state.scopes.checkedScopesArrId.checkedScopesArrId?state.scopes.checkedScopesArrId.checkedScopesArrId:'',
+checkedScopesArrName:state.scopes.checkedScopesArrId&&state.scopes.checkedScopesArrId.checkedScopesArrName?state.scopes.checkedScopesArrId.checkedScopesArrName:'',
 
 //classes:state.object.isRequired
 //auth: state.auth,
